@@ -1,36 +1,33 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
-const Currency = (props) => {
-    const [currency, setCurrency] = useState('USD');
-    
+const Currency = () => {
+  const {dispatch} = useContext(AppContext);
 
-    function handleCurrencyChange(event) {
-        setCurrency(event.target.value);
-      }
+	const changeCurrency = (val)=>{
+			dispatch({
+				type: 'CHG_CURRENCY',
+				payload: val,
+			})
+	}
 
-      return (
-        <div>
-          <div className='row'>
-            <select
-              className="custom-select"
-              id="inputGroupSelect02"
-              onChange={handleCurrencyChange}
-              style={{
-                backgroundColor: "#98FB98",
-                color: 'white',
-                
-              }}
-            >
-              <option defaultValue value={currency} name="Dollar">$ Dollar</option>
-              <option value="Pound" name="Pound">£ Pound</option>
-              <option value="Euro" name="Euro">€ Euro</option>
-              <option value="Ruppee" name="Ruppee">₹ Ruppee</option>
-            </select>
-          </div>
-        </div>
-      );
-      
+    /*const styles={
+        hover: { backgroundcolor: 'red', border:'1px solid red' }
+    }*/
+	
+   return (
+		<div className='alert alert-secondary'>
+        <label style={{marginLeft: '1rem' , backgroundColor:'#93e499', color:'white'}} > Currency
+        <select name='hover_color' id="currency" onChange={(event)=>changeCurrency(event.target.value)} style={{ marginLeft: '1rem' , backgroundColor:'#93e499', color:'white'}}>
+        <option style={{color:'black'}} value="£">£ Pound</option>
+        <option style={{color:'black'}} value="$">$ Dollar</option>
+        <option style={{color:'black'}} value="€">€ Euro</option>
+        <option style={{color:'black'}} value="₹">₹ Rupee</option>
+      </select>	
+      </label>
+      	
+    </div>
+	);
 };
 
 export default Currency;
